@@ -1,0 +1,515 @@
+System.out.println("\nHi, here is the solution of Davinder of VEHICLE SURVAY CODE CHALLENGE");		
+		System.out.println("Type the number corresponding to what you want to calculate");
+		System.out.println("1. Number of vehicle per time");
+		System.out.println("2. Peak volume time");
+		System.out.println("3. Speed distribution of traffic");
+		System.out.println("4. Distance between vehicles");
+		boolean k = true;
+		String numberTyped;
+		int number = 0;
+		while(k == true){
+			numberTyped = System.console().readLine();
+			if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2") || numberTyped.equals("3") || numberTyped.equals("4")){
+				number = Integer.parseInt(numberTyped);
+				k = false;
+				if (number == 1){
+					System.out.println("For which direction do you want to know the number of vehicles? (type a number)");
+					System.out.println("1. Northbound");
+					System.out.println("2. Southbound");
+					boolean w = true;
+					while(w == true){
+						numberTyped = System.console().readLine();
+						if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2")){
+							number = Integer.parseInt(numberTyped);
+							w = false;
+						}
+						else {
+							System.out.println("Please type 1 for Northbound or 2 for Southbound");
+						}
+					}
+					if (number == 1){
+						System.out.println("Do you want to know the number of vehicles in a time range or per minutes?");
+						System.out.println("1. Time Range");
+						System.out.println("2. Per minutes");
+						w = true;
+						while(w == true){
+							numberTyped = System.console().readLine();
+							if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2")){
+								number = Integer.parseInt(numberTyped);
+								w = false;
+							}
+							else {
+								System.out.println("Please type 1 for Time Range or 2 for Minutes");
+							}
+						}
+						if (number == 1){
+							int c = 0;
+							String first_range = "";
+							String second_range = "";
+							System.out.println("Enter time range in format hh:mm (example 20:30)");
+							while (c != 2){
+								if (c == 0)
+									System.out.print("Enter first time: ");
+								else if (c == 1)
+									System.out.print("Enter second time: ");
+								numberTyped = System.console().readLine();
+								String first_h = numberTyped.split(":")[0];
+								String first_m = numberTyped.split(":")[1];
+								int h = -1;
+								int m = -1;
+								boolean p = true;
+								try {
+									h = Integer.parseInt(first_h);
+									m = Integer.parseInt(first_m);
+								} catch (Exception e) {
+									System.out.println("Retry ");
+									p = false;
+								}
+								if (h >= 0 && h <= 24 && m >= 0 & m <= 59){
+									if (c == 0){
+										first_range =  numberTyped;
+									}
+									else if (c == 1){
+										second_range = numberTyped;
+									}
+									c++;
+								}
+								else {
+									if (p)
+										System.out.println("Retry ");
+									c = 0;
+								}
+							}
+							System.out.println("Northbound: The number of vehicles from "+first_range+" to "+second_range+" is: "+operations.getAvgVehiclesPerTimeRange(northSouth_maps[0], first_range+" "+second_range, "Northbound"));
+						}
+						else if (number == 2){
+							System.out.print("Enter number of minutes: ");
+							boolean y = true;
+							int mnts = 0;
+							while (y){
+								try {
+									mnts = Integer.parseInt(System.console().readLine());
+									y = false;
+								} catch (Exception e) {
+									y = true;
+									System.out.println("Please enter a number");
+								}
+							}
+							System.out.println("Northbound: The number of vehicles per "+mnts+" minutes is: "+operations.getAvgVehiclesPerMinutes(northSouth_maps[0], mnts, "Northbound"));
+						}
+					}
+					else if (number == 2){
+						System.out.println("Do you want to know the number of vehicles in a time range or per minutes?");
+						System.out.println("1. Time range");
+						System.out.println("2. Per minutes");
+						w = true;
+						while(w == true){
+							numberTyped = System.console().readLine();
+							if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2")){
+								number = Integer.parseInt(numberTyped);
+								w = false;
+							}
+							else {
+								System.out.println("Please type 1 for Range Time or 2 for Minutes");
+							}
+						}
+						if (number == 1){
+							int c = 0;
+							String first_range = "";
+							String second_range = "";
+							System.out.println("Enter time range in format hh:mm (example 20:30)");
+							while (c != 2){
+								if (c == 0)
+									System.out.print("Enter first time: ");
+								else if (c == 1)
+									System.out.print("Enter second time: ");
+								numberTyped = System.console().readLine();
+								String first_h = numberTyped.split(":")[0];
+								String first_m = numberTyped.split(":")[1];
+								int h = -1;
+								int m = -1;
+								boolean p = true;
+								try {
+									h = Integer.parseInt(first_h);
+									m = Integer.parseInt(first_m);
+								} catch (Exception e) {
+									System.out.println("Retry ");
+									p = false;
+								}
+								if (h >= 0 && h <= 24 && m >= 0 & m <= 59){
+									if (c == 0){
+										first_range =  numberTyped;
+									}
+									else if (c == 1){
+										second_range = numberTyped;
+									}
+									c++;
+								}
+								else {
+									if (p)
+										System.out.println("Retry ");
+									c = 0;
+								}
+							}
+							System.out.println("Southbound: The number of vehicles from "+first_range+" to "+second_range+" is: "+operations.getAvgVehiclesPerTimeRange(northSouth_maps[1], first_range+" "+second_range, "Southbound"));
+						}
+						else if (number == 2){
+							System.out.print("Enter number of minutes: ");
+							boolean y = true;
+							int mnts = 0;
+							while (y){
+								try {
+									mnts = Integer.parseInt(System.console().readLine());
+									y = false;
+								} catch (Exception e) {
+									y = true;
+									System.out.println("Please enter a number");
+								}
+							}
+							System.out.println("Southbound: The number of vehicles per "+mnts+" minutes is: "+operations.getAvgVehiclesPerMinutes(northSouth_maps[1], mnts, "Southbound"));
+						}
+					}
+				}
+				else if (number == 2){
+					System.out.println("Choose a direction");
+					System.out.println("1. Northbound");
+					System.out.println("2. Southbound");
+					boolean w = true;
+					while(w == true){
+						numberTyped = System.console().readLine();
+						if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2")){
+							number = Integer.parseInt(numberTyped);
+							w = false;
+						}
+						else {
+							System.out.println("Please type 1 for Northbound or 2 for Southbound");
+						}
+					}
+					if (number == 1){
+						System.out.print("Enter number of minutes: ");
+						boolean y = true;
+						int mnts = 0;
+						while (y){
+							try {
+								mnts = Integer.parseInt(System.console().readLine());
+								y = false;
+							} catch (Exception e) {
+								y = true;
+								System.out.println("Please enter a number");
+							}
+						}
+						System.out.println("\nNorthbound: Peak volume times per "+mnts+" minutes (first three values)");
+						System.out.println("If is reported a time X its mean that from (X - "+mnts+") to X have passed the number of vehicles indicated");
+						Map<Integer, List<String>> mapp = operations.getPeakVolumeTimes(northSouth_maps[0], mnts, "Northbound");
+						System.out.println("NumberVehicles   Times");
+						int ee = 0;
+						for (Integer key : mapp.keySet()) {
+							if (ee < 3){
+								System.out.println(key+"		 "+mapp.get(key));
+								ee++;
+							}
+							else break;
+						}
+						
+					}
+					else{
+						System.out.print("Enter number of minutes: ");
+						boolean y = true;
+						int mnts = 0;
+						while (y){
+							try {
+								mnts = Integer.parseInt(System.console().readLine());
+								y = false;
+							} catch (Exception e) {
+								y = true;
+								System.out.println("Please enter a number");
+							}
+						}
+						
+						System.out.println("\nSouthbound: Peak volume times per "+mnts+" minutes (first three values)");
+						System.out.println("If is reported a time X its mean that from (X - "+mnts+") to X have passed the number of vehicles indicated");
+						Map<Integer, List<String>> mapp = operations.getPeakVolumeTimes(northSouth_maps[1], mnts, "Southbound");
+						System.out.println("NumberVehicles   Times");
+						int ee = 0;
+						for (Integer key : mapp.keySet()) {
+							if (ee < 3){
+								System.out.println(key+"		 "+mapp.get(key));
+								ee++;
+							}
+							else break;
+						}
+					}
+				}
+				else if (number == 3){
+					System.out.println("Choose a direction");
+					System.out.println("1. Northbound");
+					System.out.println("2. Southbound");
+					boolean w = true;
+					while(w == true){
+						numberTyped = System.console().readLine();
+						if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2")){
+							number = Integer.parseInt(numberTyped);
+							w = false;
+						}
+						else {
+							System.out.println("Please type 1 for Northbound or 2 for Southbound");
+						}
+					}
+					if (number == 1){
+						System.out.println("Do you want to know the speed distribution of traffic in a time range or in all the day?");
+						System.out.println("1. Time Range");
+						System.out.println("2. In all the day");
+						w = true;
+						while(w == true){
+							numberTyped = System.console().readLine();
+							if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2")){
+								number = Integer.parseInt(numberTyped);
+								w = false;
+							}
+							else {
+								System.out.println("Please type 1 for Time Range or 2 for Minutes");
+							}
+						}
+						if (number == 1){
+							int c = 0;
+							String first_range = "";
+							String second_range = "";
+							System.out.println("Enter time range in format hh:mm (example 20:30)");
+							while (c != 2){
+								if (c == 0)
+									System.out.print("Enter first time: ");
+								else if (c == 1)
+									System.out.print("Enter second time: ");
+								numberTyped = System.console().readLine();
+								String first_h = numberTyped.split(":")[0];
+								String first_m = numberTyped.split(":")[1];
+								int h = -1;
+								int m = -1;
+								boolean p = true;
+								try {
+									h = Integer.parseInt(first_h);
+									m = Integer.parseInt(first_m);
+								} catch (Exception e) {
+									System.out.println("Retry ");
+									p = false;
+								}
+								if (h >= 0 && h <= 24 && m >= 0 & m <= 59){
+									if (c == 0){
+										first_range =  numberTyped;
+									}
+									else if (c == 1){
+										second_range = numberTyped;
+									}
+									c++;
+								}
+								else {
+									if (p)
+										System.out.println("Retry ");
+									c = 0;
+								}
+							}
+							System.out.println("Northbound: The speed distribution of traffic from "+first_range+" to "+second_range+" is: "+operations.getSpeedDistributionOfTraffic(northSouth_maps[0], "Northbound" , first_range+" "+second_range)+" kph");
+						}
+						else if (number == 2){
+							System.out.println("Northbound: The speed distribution of traffic in all the day is: "+operations.getSpeedDistributionOfTraffic(northSouth_maps[0], "Northbound" , "24H")+" kph");
+						}					
+					}
+					else {
+						System.out.println("Do you want to know the speed distribution of traffic in a time range or in all the day?");
+						System.out.println("1. Time range");
+						System.out.println("2. In all the day");
+						w = true;
+						while(w == true){
+							numberTyped = System.console().readLine();
+							if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2")){
+								number = Integer.parseInt(numberTyped);
+								w = false;
+							}
+							else {
+								System.out.println("Please type 1 for Time Range or 2 for Minutes");
+							}
+						}
+						if (number == 1){
+							int c = 0;
+							String first_range = "";
+							String second_range = "";
+							System.out.println("Enter time range in format hh:mm (example 20:30)");
+							while (c != 2){
+								if (c == 0)
+									System.out.print("Enter first time: ");
+								else if (c == 1)
+									System.out.print("Enter second time: ");
+								numberTyped = System.console().readLine();
+								String first_h = numberTyped.split(":")[0];
+								String first_m = numberTyped.split(":")[1];
+								int h = -1;
+								int m = -1;
+								boolean p = true;
+								try {
+									h = Integer.parseInt(first_h);
+									m = Integer.parseInt(first_m);
+								} catch (Exception e) {
+									System.out.println("Retry ");
+									p = false;
+								}
+								if (h >= 0 && h <= 24 && m >= 0 & m <= 59){
+									if (c == 0){
+										first_range =  numberTyped;
+									}
+									else if (c == 1){
+										second_range = numberTyped;
+									}
+									c++;
+								}
+								else {
+									if (p)
+										System.out.println("Retry ");
+									c = 0;
+								}
+							}
+							System.out.println("Southbound: The speed distribution of traffic from "+first_range+" to "+second_range+" is: "+operations.getSpeedDistributionOfTraffic(northSouth_maps[1], "Southbound" , first_range+" "+second_range)+" kph");
+						}
+						else if (number == 2){
+							System.out.println("Southbound: The speed distribution of traffic in all the day is: "+operations.getSpeedDistributionOfTraffic(northSouth_maps[1], "Southbound" , "24H")+" kph");
+						}	
+					}
+				}
+				else{
+					System.out.println("Choose a direction");
+					System.out.println("1. Northbound");
+					System.out.println("2. Southbound");
+					boolean w = true;
+					while(w == true){
+						numberTyped = System.console().readLine();
+						if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2")){
+							number = Integer.parseInt(numberTyped);
+							w = false;
+						}
+						else {
+							System.out.println("Please type 1 for Northbound or 2 for Southbound");
+						}
+					}
+					if (number == 1){
+						System.out.println("Do you want to know the distance between vehicles in a time range or in all the day?");
+						System.out.println("1. Time Range");
+						System.out.println("2. In all the day");
+						w = true;
+						while(w == true){
+							numberTyped = System.console().readLine();
+							if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2")){
+								number = Integer.parseInt(numberTyped);
+								w = false;
+							}
+							else {
+								System.out.println("Please type 1 for Time Range or 2 for Minutes");
+							}
+						}
+						if (number == 1){
+							int c = 0;
+							String first_range = "";
+							String second_range = "";
+							System.out.println("Enter time range in format hh:mm (example 20:30)");
+							while (c != 2){
+								if (c == 0)
+									System.out.print("Enter first time: ");
+								else if (c == 1)
+									System.out.print("Enter second time: ");
+								numberTyped = System.console().readLine();
+								String first_h = numberTyped.split(":")[0];
+								String first_m = numberTyped.split(":")[1];
+								int h = -1;
+								int m = -1;
+								boolean p = true;
+								try {
+									h = Integer.parseInt(first_h);
+									m = Integer.parseInt(first_m);
+								} catch (Exception e) {
+									System.out.println("Retry ");
+									p = false;
+								}
+								if (h >= 0 && h <= 24 && m >= 0 & m <= 59){
+									if (c == 0){
+										first_range =  numberTyped;
+									}
+									else if (c == 1){
+										second_range = numberTyped;
+									}
+									c++;
+								}
+								else {
+									if (p)
+										System.out.println("Retry ");
+									c = 0;
+								}
+							}
+							System.out.println("Northbound: The distance beetween vehicles from "+first_range+" to "+second_range+" is: "+operations.getDistanceBetweenVehicles(northSouth_maps[0], "Northbound", first_range+" "+second_range)+" m");
+						}
+						else if (number == 2){
+							System.out.println("Northbound: The distance beetween vehicles in all the day is: "+operations.getDistanceBetweenVehicles(northSouth_maps[0], "Northbound" , "24H")+" m");
+						}					
+					}
+					else{
+						System.out.println("Do you want to know the distance between vehicles in a time range or in all the day?");
+						System.out.println("1. Time Range");
+						System.out.println("2. In all the day");
+						w = true;
+						while(w == true){
+							numberTyped = System.console().readLine();
+							if (numberTyped.equals("1") || numberTyped.equalsIgnoreCase("2")){
+								number = Integer.parseInt(numberTyped);
+								w = false;
+							}
+							else {
+								System.out.println("Please type 1 for Time Range or 2 for Minutes");
+							}
+						}
+						if (number == 1){
+							int c = 0;
+							String first_range = "";
+							String second_range = "";
+							System.out.println("Enter time range in format hh:mm (example 20:30)");
+							while (c != 2){
+								if (c == 0)
+									System.out.print("Enter first time: ");
+								else if (c == 1)
+									System.out.print("Enter second time: ");
+								numberTyped = System.console().readLine();
+								String first_h = numberTyped.split(":")[0];
+								String first_m = numberTyped.split(":")[1];
+								int h = -1;
+								int m = -1;
+								boolean p = true;
+								try {
+									h = Integer.parseInt(first_h);
+									m = Integer.parseInt(first_m);
+								} catch (Exception e) {
+									System.out.println("Retry ");
+									p = false;
+								}
+								if (h >= 0 && h <= 24 && m >= 0 & m <= 59){
+									if (c == 0){
+										first_range =  numberTyped;
+									}
+									else if (c == 1){
+										second_range = numberTyped;
+									}
+									c++;
+								}
+								else {
+									if (p)
+										System.out.println("Retry ");
+									c = 0;
+								}
+							}
+							System.out.println("Southbound: The distance beetween vehicles from "+first_range+" to "+second_range+" is: "+operations.getDistanceBetweenVehicles(northSouth_maps[1], "Southbound", first_range+" "+second_range)+" m");
+						}
+						else if (number == 2){
+							System.out.println("Southbound: The distance beetween vehicles in all the day is: "+operations.getDistanceBetweenVehicles(northSouth_maps[1], "Southbound" , "24H")+" m");
+						}
+					}
+				}
+			}
+			else{
+				System.out.println("please type a number from 1 to 4 :)");
+			}
+		}
